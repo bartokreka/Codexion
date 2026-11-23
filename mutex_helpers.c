@@ -6,7 +6,7 @@
 /*   By: rbartok <rbartok@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 20:05:25 by rbartok           #+#    #+#             */
-/*   Updated: 2026/09/23 17:13:39 by rbartok          ###   ########.fr       */
+/*   Updated: 2026/11/23 18:33:26 by rbartok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ t_coder_state	get_coder_status(t_coder *coder)
 	coder_state = coder->state;
 	pthread_mutex_unlock(&coder->simulation->coder_mutex);
 	return (coder_state);
+}
+
+void	safe_print(t_simulation *sim, long long when, int id, char *m)
+{
+	pthread_mutex_lock(&sim->simulation_mutex);
+	if (!sim->simulation_finished)
+		printf("%lld %d %s", when, id, m);
+	pthread_mutex_unlock(&sim->simulation_mutex);
 }

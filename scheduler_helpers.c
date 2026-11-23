@@ -6,7 +6,7 @@
 /*   By: rbartok <rbartok@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 20:05:25 by rbartok           #+#    #+#             */
-/*   Updated: 2026/09/23 19:34:17 by rbartok          ###   ########.fr       */
+/*   Updated: 2026/11/23 18:34:11 by rbartok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ int	is_coder_burned_out(t_coder *coders)
 		locked_lcs = get_last_compile_start(&coders[i]);
 		if (now - locked_lcs >= coder_burnout)
 		{
-			printf("%lld %d burned out\n",
-				now,
-				coders[i].coder_id);
+			pthread_mutex_lock(&coders->simulation->simulation_mutex);
+			if (!coders->simulation->simulation_finished)
+			{
+				printf("%lld %d burned out\n", now, coders[i].coder_id);
+				coders->simulation->simulation_finished = 1;
+			}
+			pthread_mutex_unlock(&coders->simulation->simulation_mutex);
 			return (1);
 		}
 		i++;

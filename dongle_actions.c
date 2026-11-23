@@ -6,7 +6,7 @@
 /*   By: rbartok <rbartok@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 21:38:32 by rbartok           #+#    #+#             */
-/*   Updated: 2026/09/23 14:34:28 by rbartok          ###   ########.fr       */
+/*   Updated: 2026/11/23 18:31:28 by rbartok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ static int	use_dongles(t_coder *coder)
 	heap_pop(&coder->simulation->heap);
 	when = get_time() - coder->simulation->simulation_start_time;
 	d1->state = IN_USE;
-	printf("%lld %d has taken a dongle\n", when, coder->coder_id);
+	safe_print(coder->simulation, when, coder->coder_id, "has taken a dongle\n");
 	d2->state = IN_USE;
-	printf("%lld %d has taken a dongle\n", when, coder->coder_id);
+	safe_print(coder->simulation, when, coder->coder_id, "has taken a dongle\n");
 	pthread_mutex_lock(&coder->simulation->coder_mutex);
 	coder->last_compile_start = when;
 	pthread_mutex_unlock(&coder->simulation->coder_mutex);

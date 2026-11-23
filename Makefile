@@ -6,7 +6,7 @@
 #    By: rbartok <rbartok@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/02 18:07:48 by rbartok           #+#    #+#              #
-#    Updated: 2026/09/23 19:02:45 by rbartok          ###   ########.fr        #
+#    Updated: 2026/11/23 18:27:25 by rbartok          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC = main.c arg_validation.c time_helpers.c thread_helpers.c simulation.c dongl
 OBJ = $(SRC:.c=.o)
 NAME = codexion
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread 
+# -g -fsanitize=address -fsanitize=undefined
 
 all: $(NAME)
 
